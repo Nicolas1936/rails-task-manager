@@ -1,0 +1,18 @@
+<h1>Index</h1>
+
+<ul>
+<% @tasks.each do |task| %>
+  <% if task.completed then checked = "checked" else checked = "" end%>
+  <li>
+    <input type="checkbox" name="task<%= task.id %>" <%= checked %>>
+    <label for="task<%= task.id %>"> <%= link_to task.title, task_path(task) %></label>
+
+    <%= link_to task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+      <i class="fa fa-trash-o"></i>
+    <% end %>
+
+  </li>
+<% end %>
+</ul>
+
+<p><%= link_to "Add new task", new_task_path %></p>
